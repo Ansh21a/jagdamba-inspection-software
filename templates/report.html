@@ -1,0 +1,9 @@
+
+<!doctype html><html><head><link rel="stylesheet" href="/static/style.css"></head>
+<body><h2>Create Report</h2>
+<form method="post">
+<select name="party">{% for p in parties %}<option>{{p}}</option>{% endfor %}</select>
+<select name="inspector">{% for i in inspectors %}<option>{{i}}</option>{% endfor %}</select>
+<input name="date" placeholder="DD/MM/YYYY">
+<button>Save</button></form>
+<a href="/dashboard">Back</a></body></html>

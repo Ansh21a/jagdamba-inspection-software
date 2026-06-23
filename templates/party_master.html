@@ -1,0 +1,10 @@
+
+<!doctype html><html><head><link rel="stylesheet" href="/static/style.css"></head>
+<body><h2>Party Master</h2>
+<form method="post">
+<input name="party" placeholder="Party Name">
+<input name="addr" placeholder="Address">
+<input name="gst" placeholder="GST">
+<button>Save</button></form>
+<table>{% for r in rows %}<tr><td>{{r[1]}}</td><td>{{r[2]}}</td><td>{{r[3]}}</td></tr>{% endfor %}</table>
+<a href="/dashboard">Back</a></body></html>

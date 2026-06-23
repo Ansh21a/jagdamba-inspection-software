@@ -1,0 +1,9 @@
+
+<!doctype html><html><head><link rel="stylesheet" href="/static/style.css"></head>
+<body><h2>Inspector Master</h2>
+<form method="post">
+<input name="name" placeholder="Inspector Name">
+<input name="desig" placeholder="Designation">
+<button>Save</button></form>
+<table>{% for r in rows %}<tr><td>{{r[1]}}</td><td>{{r[2]}}</td></tr>{% endfor %}</table>
+<a href="/dashboard">Back</a></body></html>
