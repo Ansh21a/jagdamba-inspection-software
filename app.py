@@ -28,7 +28,9 @@ def init_db():
 @app.route("/", methods=["GET","POST"])
 def login():
     if request.method=="POST":
-        u,p = request.form["u"], request.form["p"]
+        # login.html submits `username` and `password`
+        u = request.form.get("username", "")
+        p = request.form.get("password", "")
         con=db(); cur=con.cursor()
         cur.execute("SELECT * FROM users WHERE username=? AND password=?",(u,p))
         ok = cur.fetchone(); con.close()
