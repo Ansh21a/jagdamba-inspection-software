@@ -1,30 +1,26 @@
 
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for
+from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = "jagdamba_secret_key"
+
+users = {
+    "admin": "1234"
+}
 
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-        if username == "admin" and password == "admin":
-            session["user"] = username
+        username = request.form.get("username")
+        password = request.form.get("password")
+        if username in users and users[username] == password:
             return redirect(url_for("dashboard"))
-        return render_template("login.html", error="Invalid login")
+        return "Invalid login"
     return render_template("login.html")
 
 @app.route("/dashboard")
 def dashboard():
-    if "user" not in session:
-        return redirect(url_for("login"))
-    return render_template("dashboard.html")
-
-@app.route("/logout")
-def logout():
-    session.clear()
-    return redirect(url_for("login"))
+    return "Login Successful - " + datetime.now().strftime("%d-%m-%Y")
 
 if __name__ == "__main__":
     app.run(debug=True)
