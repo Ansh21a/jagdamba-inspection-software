@@ -1,26 +1,22 @@
 
-from flask import Flask, render_template, request, redirect, url_for
-from datetime import datetime
+from flask import Flask, render_template, request, redirect, url_for, flash
+import os
 
 app = Flask(__name__)
-
-users = {
-    "admin": "1234"
-}
+app.secret_key = "jagdamba_secret"
 
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
-        if username in users and users[username] == password:
+        if request.form.get("username") == "admin" and request.form.get("password") == "admin":
             return redirect(url_for("dashboard"))
-        return "Invalid login"
+        flash("Invalid login")
     return render_template("login.html")
 
 @app.route("/dashboard")
 def dashboard():
-    return "Login Successful - " + datetime.now().strftime("%d-%m-%Y")
+    return render_template("dashboard.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
